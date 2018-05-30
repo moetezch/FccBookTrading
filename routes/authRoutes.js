@@ -9,7 +9,7 @@ module.exports = app => {
         "/auth/google/callback",
         passport.authenticate("google"),
         (req, res) => {
-            res.redirect('/mypolls')
+            res.redirect('/profile')
         }
     )
     app.get('/auth/twitter',
@@ -18,7 +18,7 @@ module.exports = app => {
     app.get('/auth/twitter/callback',
         passport.authenticate('twitter', { failureRedirect: '/login' }),
         (req, res) => {
-            res.redirect('/mypolls');
+            res.redirect('/profile');
         });
 
     app.get('/auth/github',
@@ -27,7 +27,7 @@ module.exports = app => {
     app.get('/auth/github/callback',
         passport.authenticate('github', { failureRedirect: '/login' }),
         (req, res) => {
-            res.redirect('/mypolls');
+            res.redirect('/profile');
         });
 
     app.get('/api/logout', (req, res) => {

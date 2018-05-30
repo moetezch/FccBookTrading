@@ -2,17 +2,25 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const userSchema = new Schema({
+	firstName: String,
+	lastName:String,
+	books: Array,
+	phone: String,
+	email: String,
+	address: {
+    country: String,
+    city: String,
+    state: String,
+	},
+	trades: Array,
 	google: {
-		id: String,
-		name: String
+		id: String
 	},
 	github: {
-		id: String,
-		name: String
+		id: String
 	},
 	twitter: {
 		id: String,
-		name: String
 	}
 })
 
