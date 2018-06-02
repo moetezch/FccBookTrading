@@ -13,6 +13,7 @@ const userSchema = new Schema({
     state: String,
 	},
 	trades: Array,
+	firstLogin:{type: Boolean,default:true},
 	google: {
 		id: String
 	},

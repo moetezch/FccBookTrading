@@ -1,30 +1,160 @@
-import React, { Component } from 'react';
-import { Row,Input,Icon } from "react-materialize"
-import { reduxForm, Field, FieldArray } from 'redux-form'
-export default class Settings extends Component {
+import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import { Row, Input, Icon } from "react-materialize"
+import { reduxForm, Field} from 'redux-form'
+import validate from '../utils/validateProfileForm'
+import { saveUser,fetchUserProfile,fetchUser} from '../actions/index'
+let icon,text
+const renderField = ({ input, label, type, meta: { touched, error }, ...custom }) => (
+
+  <div>
+
+    <Input {...input} type={type} placeholder={label} style={{ marginBottom: "15px",marginRight: "15px" }}{...custom} validate/>
+    <div className="red-text"  style={{marginBottom:'20px'}}>
+    {touched && error}
+    </div>
+    </div>
+)
+
+
+
+class Profile extends Component {
+
+  componentDidMount() {
+    this.handleInitialize();
+  }
+  handleInitialize() {
+  
+    let initData={}
+    if (this.props.auth) {
+      initData = {
+        firstName:this.props.auth.firstName,
+        lastName: this.props.auth.lastName,
+        email: this.props.auth.email,
+        phone: this.props.auth.phone,
+        country: this.props.auth.address.country,
+        state: this.props.auth.address.state,
+        city: this.props.auth.address.city
+        };
+    }
+
+  
+    this.props.initialize(initData);
+  }
+  onSubmit = (profile) => {
+    this.props.saveUser(this.props.auth._id,profile)
+    this.props.history.push('/books');
+    
+  }
+
+  renderButton(){
+    if (this.props.auth) {
+     switch (this.props.auth.firstLogin) {
+       case null:
+         return 
+      case true:
+      return (
+        <button className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">done</i>Save</button>
+
+      )
+     
+       default:
+         return (
+          <button className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">sync</i>Update</button>
+
+         )
+     }
+  }
+  }
   render() {
+    
+    const { handleSubmit, submitting } = this.props
+
     return (
       <div className="container">
-      
-      <h2>Profile</h2>  
-      <form onSubmit={()=>console.log('hi there ')}>    
-      <Row>
-      <Input s={6} label="First Name"><Icon>account_circle</Icon></Input>
-      <Input s={6} label="last Name"><Icon>supervisor_account</Icon></Input>
-      <Input type="email" label="Email" s={12}><Icon>email</Icon></Input>
-      <Input s={12} label="Telephone" type='tel'><Icon>phone</Icon></Input>
-      <Input s={4} label="Country" type='tel'><Icon></Icon></Input>
-      <Input s={4} label="State" type='tel'><Icon></Icon></Input>
-      <Input s={4} label="City" type='tel'><Icon></Icon></Input>
-  </Row>
-          <button className="btn waves-effect waves-light"
-           type="submit" >
-           <i className="material-icons right">done</i>
-           Save
-           </button>
-  </form>
-      
+        <h2>Profile</h2>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
+          <Row>
+            <Field
+              name="firstName"
+              type="text"
+              component={renderField}
+              label="First Name"
+              s={12}
+              
+            >
+              <Icon>account_circle</Icon>
+            </Field>
+            <Field
+              name="lastName"
+              type="text"
+              component={renderField}
+              label="Last Name"
+              s={12}
+            >
+              <Icon>supervisor_account</Icon>
+            </Field>
+            <Field
+              name="email"
+              type="email"
+              component={renderField}
+              label="Email"
+              s={12}
+            >
+              <Icon>email</Icon>
+            </Field>
+            <Field
+              name="phone"
+              type="tel"
+              component={renderField}
+              label="Phone"
+              s={12}
+            >
+              <Icon>phone</Icon>
+            </Field>
+            <Field
+              name="country"
+              type="text"
+              component={renderField}
+              label="Country"
+              s={12}
+            />
+            <Field
+              name="state"
+              type="text"
+              component={renderField}
+              label="State"
+              s={12}
+            />
+            <Field
+              name="city"
+              type="text"
+              component={renderField}
+              label="City"
+              s={12}
+            />
+          </Row>
+          
+          <div>
+
+        {this.renderButton()}
+          </div>
+        </form>
+
+
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+const mapDispatchToProps = (dispatch) => ({
+  saveUser: (id,profile) => dispatch(saveUser(id,profile)),
+  fetchUser:()=> dispatch(fetchUser()),
+});
+Profile=connect(mapStateToProps,mapDispatchToProps)(Profile)
+export default reduxForm({
+  form: 'profileForm',
+  validate
+})(Profile)
