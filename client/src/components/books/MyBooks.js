@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import BookList from './BookList'
 
-export default class AllBooks extends Component {
+export default class MyPBooks extends Component {
+
   render() {
     return (
-      <div className="container">myBooks</div>
+      <div className="container">
+        <BookList />
+      </div>
     );
   }
 }

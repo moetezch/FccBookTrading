@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import { Row, Input, Icon } from "react-materialize"
 import { reduxForm, Field} from 'redux-form'
 import validate from '../utils/validateProfileForm'
-import { saveUser,fetchUserProfile,fetchUser} from '../actions/index'
-let icon,text
+import { saveUser,fetchUser} from '../actions/index'
 const renderField = ({ input, label, type, meta: { touched, error }, ...custom }) => (
 
   <div>
@@ -21,6 +20,8 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 class Profile extends Component {
 
   componentDidMount() {
+    this.props.dispatch(fetchUser())
+    
     this.handleInitialize();
   }
   handleInitialize() {
@@ -43,6 +44,7 @@ class Profile extends Component {
   }
   onSubmit = (profile) => {
     this.props.saveUser(this.props.auth._id,profile)
+    this.props.fetchUser()
     this.props.history.push('/books');
     
   }
@@ -68,7 +70,7 @@ class Profile extends Component {
   }
   render() {
     
-    const { handleSubmit, submitting } = this.props
+    const { handleSubmit } = this.props
 
     return (
       <div className="container">

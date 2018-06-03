@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link,NavLink } from "react-router-dom"
-import { Dropdown,NavItem,Button,SideNavItem, SideNav } from "react-materialize"
+import { Dropdown,NavItem,Button } from "react-materialize"
 
 class Header extends Component {
   renderContent() {

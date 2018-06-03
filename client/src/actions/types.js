@@ -1,3 +1,5 @@
 export const FETCH_USER='fetch_user'
 export const SAVE_USER='save_user'
-export const FETCH_USER_PROFILE='fetch_user_profile'
+export const ADD_BOOK='add_book'
+export const FETCH_BOOKS='fetch_books'
+export const FETCH_MY_BOOKS='fetch_MY_books'

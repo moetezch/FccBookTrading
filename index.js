@@ -27,6 +27,7 @@ app.use(passport.session())
 
 require("./routes/authRoutes")(app)
 require("./routes/userRoutes")(app)
+require("./routes/bookRoutes")(app)
 
 
 if (process.env.NODE_ENV==='production') {
