@@ -4,7 +4,6 @@ const { Schema } = mongoose
 const userSchema = new Schema({
 	firstName: String,
 	lastName:String,
-	books: Array,
 	phone: String,
 	email: String,
 	address: {
@@ -12,7 +11,6 @@ const userSchema = new Schema({
     city: String,
     state: String,
 	},
-	trades: Array,
 	firstLogin:{type: Boolean,default:true},
 	google: {
 		id: String

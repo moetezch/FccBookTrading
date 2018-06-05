@@ -5,6 +5,7 @@ const bookSchema = new Schema({
   title:{type: String, required: true},
   pic:{type: String, required: true},
   description: {type: String, required: true},
+  added:Date,
 	_user:{type:Schema.Types.ObjectId,ref:'User'}
 })
 

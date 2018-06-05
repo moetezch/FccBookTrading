@@ -17,6 +17,7 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 
 
 
+
 class Profile extends Component {
 
   componentDidMount() {
@@ -36,6 +37,16 @@ class Profile extends Component {
         country: this.props.auth.address.country,
         state: this.props.auth.address.state,
         city: this.props.auth.address.city
+        }
+    }else {
+      initData = {
+        firstName:"",
+        lastName: "",
+        email: "",
+        phone: "",
+        country: "",
+        state:"",
+        city: ""
         };
     }
 
@@ -43,6 +54,8 @@ class Profile extends Component {
     this.props.initialize(initData);
   }
   onSubmit = (profile) => {
+    console.log(profile);
+    
     this.props.saveUser(this.props.auth._id,profile)
     this.props.fetchUser()
     this.props.history.push('/books');

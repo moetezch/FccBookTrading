@@ -8,7 +8,7 @@ const passport = require('passport')
 module.exports = app => {
 
 
-      app.get('/profile/:id',async (req,res)=>{
+      app.get('/api/profile/:id',async (req,res)=>{
         const query={_id:req.params.id}
         const userProfile =await User.findOne(query)
         res.send(userProfile)
