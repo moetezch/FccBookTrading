@@ -42,11 +42,12 @@ class Header extends Component {
     return (
         <div>
         <header>
-        <nav className="top-nav">
-        <div className="nav-wrapper blue-grey darken-1 ">
+        <nav className="top-nav  blue-grey darken-1">
+        <div className="nav-wrapper container">
           <Link
             to={this.props.auth ? "/dashboard" : "/"}
             className="left brand-logo"
+            
           >
             Book Trading
           </Link>
@@ -54,8 +55,6 @@ class Header extends Component {
           </div>
           
         </nav>
-        
-            
   </header>
 </div>
     )
@@ -68,41 +67,3 @@ function mapStateToProps({ auth }) {
 
 export default connect(mapStateToProps)(Header)
 
-
-/*
-
-<div className="wrapper" style={{"padding-left": "300px"}}>
-        <div className="" >
-      <nav>
-        <div className="nav-wrapper blue darken-1 ">
-          <Link
-            to={this.props.auth ? "/dashboard" : "/"}
-            className="left brand-logo"
-          >
-            Book Trading
-          </Link>
-          <ul className='right center-align'> {this.renderContent()}</ul>
-        </div>
-      </nav>
-    </div>
-    <SideNav
-   // className="side-nav fixed"
-  //  trigger={<button className="btn btn-small"><i className="material-icons">menu</i></button>}
-    options={{ closeOnClick: true }}
- 
-  >
-    <SideNavItem userView
-      user={{
-        name: 'John Doeee',
-        email: 'jdandturk@gmail.com'
-      }}
-    />
-    <li><NavLink to="/books" ><i className="material-icons">done_all</i>All Books</NavLink></li>
-    <li><NavLink to="/mybooks" ><i className="material-icons">done</i>My Books</NavLink></li>
-    <li><NavLink to="/mybooks/new" ><i className="material-icons">add</i>Add Book</NavLink></li>
-    <li><NavLink to="/trade" ><i className="material-icons">history</i>Trading status</NavLink></li>
-    <li><NavLink to="/profile" ><i className="material-icons">account_circle</i>Profile</NavLink></li>
-  </SideNav>
-    </div> 
-
-*/

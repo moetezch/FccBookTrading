@@ -5,7 +5,6 @@ import * as actions from '../actions'
 
 import Header from './Header'
 import Landing from './Landing'
-import Dashboard from './Dashboard'
 import Profile from './Profile'
 import AllBooks from './books/AllBooks'
 import MyBooks from './books/MyBooks'
@@ -42,7 +41,6 @@ class App extends Component {
       <div>
         <Header />
         <Route exact path="/" component={Landing} />
-        <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/profile" component={Profile} />
         <Route path="/books" component={AllBooks} />
         <Route path="/book/:id" component={BookItem} />
