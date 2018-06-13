@@ -35,7 +35,7 @@ const Landing = () => {
 
             <div className="col s12 m4">
               <div className="icon-block">
-                <h2 className="center light-blue-text"><i className="material-icons" style={{fontSize:"4rem"}}>history</i></h2>
+                <h2 className="center light-blue-text"><i className="material-icons" style={{fontSize:"4rem"}}>compare_arrows</i></h2>
                 <h5 className="center">Send A Trade Request</h5>
 
               </div>

@@ -28,7 +28,7 @@ app.use(passport.session())
 require("./routes/authRoutes")(app)
 require("./routes/userRoutes")(app)
 require("./routes/bookRoutes")(app)
-
+require("./routes/tradeRoutes")(app)
 
 if (process.env.NODE_ENV==='production') {
     app.use(express.static('client/build'))

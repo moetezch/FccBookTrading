@@ -1,7 +1,7 @@
 {
-  "name": "votingapp",
+  "name": "booktradingapp",
   "version": "1.0.0",
-  "description": "freecodecamp Voting App",
+  "description": "freecodecamp Book Trading App",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

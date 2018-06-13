@@ -3,8 +3,6 @@ const requireLogin =require ('../middlewares/requireLogin')
 const Book=mongoose.model('books')
 
 
-const passport = require('passport')
-
 module.exports = app => {
     app.get('/api/books/:id',requireLogin,async (req,res)=>{
         const books=await Book.find({
@@ -66,5 +64,8 @@ module.exports = app => {
       res.sendStatus(200);
     });
     })
+
+    
+
   }
 

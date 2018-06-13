@@ -1,21 +1,48 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { reduxForm} from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import { Modal, Button, Row, Input } from "react-materialize"
 import * as actions from '../../actions'
+
+let optionsArrays =[]
+let noOptionsArray=[ <option key ='14' value="You don't have books yet" >You don't have books yet</option>]
+
+const renderField = ({ input, label, type, ...custom }) => (
+
+  <div>
+
+    <Input {...input} type={type} style={{ marginBottom: "15px", marginRight: "15px" }}{...custom}/>
+  </div>
+)
+
 
 class BookItem extends Component {
   componentDidMount() {
     this.props.book ? this.props.userProfile(this.props.book._user) : ""
 
-
-    console.log(this.props);
+    
+  //  console.log(this.props.book);
   }
-handleTrade(value){
-  console.log(value);
-  
-}
+  handleTrade(value,props) {
+console.log(this.props);
+
+    
+    console.log(value)
+
+  }
+  renderOptions () {
+    return this.props.books.map((book)=>{
+      if (book._user === this.props.auth._id) {
+        optionsArrays.push (<option value={book._id}>{book.title}</option>)
+       // console.log(optionsArrays);
+        
+          return optionsArrays
+      }else{
+        return noOptionsArray
+      }
+     })
+     }
 
   renderBook() {
     const { handleSubmit } = this.props
@@ -24,50 +51,68 @@ handleTrade(value){
         <div className="center">
           <h2>{this.props.book.title}</h2>
           <img src={this.props.book.pic} />
-          <p>Description : {this.props.book.description}</p>
+          <p><strong>Description</strong> : {this.props.book.description}</p>
           <h4>Owner informations : </h4>
           <p>Country : {this.props.user.address.country}</p>
           <p>State: {this.props.user.address.state}</p>
           <p>City : {this.props.user.address.city}</p>
+ 
           <Modal
             header='New Trade Request'
             trigger={<Button>Trade</Button>}
             actions={
               <div className="modal-footer">
-              <a onClick={this.handleTrade} className="modal-close waves-effect waves-green btn-flat">Confirm</a>
-              <a className="modal-close waves-effect waves-green btn-flat right">Cancel</a>
-            </div>
-          }
+                <button type="submit" className="modal-close waves-effect waves-green btn-flat" 
+                onClick={handleSubmit((value)=>{
+                  console.log("book 1",this.props.book._id);
+                  console.log("user 1",this.props.book._user);
+                  console.log("book 2",value);
+                  console.log("user 2",this.props.auth._id);
+                  const values ={
+                    "senderID":this.props.auth._id,
+                    "senderBookID":value,
+                    "receiverID":this.props.book._user,
+                    "receiverBookID":this.props.book._id
+                  }
+                  this.props.sendTradeRequest(values)
+                })}
+                
+                >Confirm</button>
+                <a className="modal-close waves-effect waves-green btn-flat right">Cancel</a>
+              </div>
+            }
           >
             <p>Select a book to trade with :</p>
-            <form onSubmit={handleSubmit((val)=>console.log(val)
-            )}>
-            <Row>
-              <Input s={12} type='select' label="Book" defaultValue='1'>
-                <option value='1'>Option 1</option>
-                <option value='2'>Option 2</option>
-                <option value='3'>Option 3</option>
-              </Input>
-            </Row>
+            <form>
+              <Row>
+              <Field
+              name="bookId"
+              type="select"
+              component={renderField}
+              label="Book Title"
+              s={12}
+            >
+            <option value="" disabled selected>Choose your option</option>
+            {this.renderOptions()}
+            </Field>
+              </Row>
             </form>
           </Modal>
-
         </div>
       )
     }
-
   }
   render() {
     return (
       <div className="container">
         {this.renderBook()}
-
+       
       </div>
     );
   }
 }
 function mapStateToProps(state, props) {
-  return { book: state.book.find((book) => book._id === props.match.params.id), user: state.user }
+  return { book: state.book.find((book) => book._id === props.match.params.id), user: state.user,books:state.book,auth:state.auth }
 }
 
 BookItem = connect(mapStateToProps, actions)(BookItem)

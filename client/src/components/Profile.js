@@ -15,9 +15,6 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
     </div>
 )
 
-
-
-
 class Profile extends Component {
 
   componentDidMount() {
