@@ -11,6 +11,8 @@ import MyBooks from './books/MyBooks'
 import NewBook from './books/NewBook'
 import Trade from './books/Trade'
 import BookItem from './books/BookItem'
+import UserDetails from './users/UserDetails';
+
 
 class App extends Component {
   
@@ -47,6 +49,7 @@ class App extends Component {
         <Route exact path="/mybooks" component={MyBooks} />
         <Route exact path="/mybooks/new" component={NewBook} />
         <Route path="/trade" component={Trade} />
+        <Route path="/users/:id" component={UserDetails} />
       </div>
     </BrowserRouter>
  

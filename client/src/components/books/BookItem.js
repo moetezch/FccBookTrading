@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { Modal, Button, Row, Input } from "react-materialize"
@@ -34,7 +34,7 @@ console.log(this.props);
   renderOptions () {
     return this.props.books.map((book)=>{
       if (book._user === this.props.auth._id) {
-        optionsArrays.push (<option value={book._id}>{book.title}</option>)
+        optionsArrays.push (<option value={book.title}>{book.title}</option>)
        // console.log(optionsArrays);
         
           return optionsArrays
@@ -65,14 +65,15 @@ console.log(this.props);
                 <button type="submit" className="modal-close waves-effect waves-green btn-flat" 
                 onClick={handleSubmit((value)=>{
                   console.log("book 1",this.props.book._id);
+                  console.log("book 1",this.props.book.title);
                   console.log("user 1",this.props.book._user);
                   console.log("book 2",value);
-                  console.log("user 2",this.props.auth._id);
+                  console.log("user 2",this.props.auth);
                   const values ={
                     "senderID":this.props.auth._id,
-                    "senderBookID":value,
+                    "senderBookTitle":value,
                     "receiverID":this.props.book._user,
-                    "receiverBookID":this.props.book._id
+                    "receiverBookTitle":this.props.book.title
                   }
                   this.props.sendTradeRequest(values)
                 })}
@@ -86,7 +87,7 @@ console.log(this.props);
             <form>
               <Row>
               <Field
-              name="bookId"
+              name="bookTitle"
               type="select"
               component={renderField}
               label="Book Title"

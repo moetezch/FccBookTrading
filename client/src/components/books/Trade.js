@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as actions from '../../actions'
+import { Modal, Button, Row, Input } from "react-materialize"
+
 
 class Trade extends Component {
   componentDidMount() {
@@ -8,15 +11,17 @@ class Trade extends Component {
   }
   renderSentTrades(){
     if (this.props.trade) {
-      return this.props.trade.map((trade)=>{
+      return this.props.trade.map((trade,index)=>{
         return (
 
 
           <li className="collection-item avatar" key={trade._id}>
-          <i className="material-icons circle">folder</i>
-          <span className="title">Title</span>
-          <p>Owner : {trade.receiver._user}</p>
-          <p>status : {trade.status}</p>
+          <i className="material-icons circle green">compare_arrows</i>
+          <span className="title">#{index+1}</span>
+          <p>Exchange Book : {trade.sender.bookTitle}</p>
+        <p>Requested Book : {trade.receiver.bookTitle}</p>
+          <p><Link to={`/users/${trade.receiver._user}`}>Book Owner details</Link></p>
+          <p>Status : {trade.status}</p>
           <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
         </li>
 
