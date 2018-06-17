@@ -32,7 +32,7 @@ class BookList extends Component {
              className="card-title activator grey-text text-darken-4">
              {book.title}
              </span>
-          <button className="btn small white"><Link to={`/book/${book._id}`}><i className="material-icons">details</i>More Info</Link></button>
+          <Link className="btn" to={`/book/${book._id}`}><i className="material-icons">details</i>More Infos</Link>
         </div>
         <div className="card-reveal">
           <span className="card-title grey-text text-darken-4">{book.title}<i className="material-icons right">close</i></span>

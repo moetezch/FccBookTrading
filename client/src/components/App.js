@@ -9,9 +9,10 @@ import Profile from './Profile'
 import AllBooks from './books/AllBooks'
 import MyBooks from './books/MyBooks'
 import NewBook from './books/NewBook'
-import Trade from './books/Trade'
 import BookItem from './books/BookItem'
-import UserDetails from './users/UserDetails';
+import UserDetails from './users/UserDetails'
+import SentRequests from './books/SentRequests'
+import ReceivedRequests from './books/ReceivedRequests'
 
 
 class App extends Component {
@@ -48,7 +49,8 @@ class App extends Component {
         <Route path="/book/:id" component={BookItem} />
         <Route exact path="/mybooks" component={MyBooks} />
         <Route exact path="/mybooks/new" component={NewBook} />
-        <Route path="/trade" component={Trade} />
+        <Route path="/sent" component={SentRequests} />
+        <Route path="/received" component={ReceivedRequests} />
         <Route path="/users/:id" component={UserDetails} />
       </div>
     </BrowserRouter>

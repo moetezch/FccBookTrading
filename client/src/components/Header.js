@@ -23,12 +23,13 @@ class Header extends Component {
         ]
       default:
         return [
-            <ul style={{"width":"230px", "marginTop":"65px"}} className="side-nav fixed" key="1">
+            <ul style={{"width":"250px", "marginTop":"65px"}} className="side-nav fixed" key="1">
 
          <li><NavLink to="/books" ><i className="material-icons">done_all</i>All Books</NavLink></li>
          <li><NavLink to="/mybooks" ><i className="material-icons">done</i>My Books</NavLink></li>
          <li><NavLink to="/mybooks/new" ><i className="material-icons">add</i>Add Book</NavLink></li>
-         <li><NavLink to="/trade" ><i className="material-icons">history</i>Trading requests</NavLink></li>
+         <li><NavLink to="/sent" ><i className="material-icons">arrow_upward</i>Sent requests</NavLink></li>
+         <li><NavLink to="/received" ><i className="material-icons">arrow_downward</i>Received requests</NavLink></li>
          <li><NavLink to="/profile" ><i className="material-icons">account_circle</i>Profile</NavLink></li>
          <li><a href="/api/logout" ><i className="material-icons">do_not_disturb</i>Logout</a></li>
         </ul>  

@@ -39,10 +39,8 @@ import { userProfile} from '../../actions/index'
   }
   render() {
     return (
-      <div className="container">
+      <div className="container" >
       {this.renderUser()}
-      <button className='btn small white'><Link to={`/trade`}><i className="material-icons">arrow_back</i></Link></button>
-      
       </div>
     )
   }
