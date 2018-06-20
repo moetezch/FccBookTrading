@@ -59,7 +59,7 @@ console.log(this.props);
       return (
         <div className="center">
           <h2>{this.props.book.title}</h2>
-          <img src={this.props.book.pic} />
+          <img src={this.props.book.pic} alt={this.props.book.title}/>
           <p><strong>Description</strong> : {this.props.book.description}</p>
           <h4>Owner informations : </h4>
           <p>Country : {this.props.user.address.country}</p>

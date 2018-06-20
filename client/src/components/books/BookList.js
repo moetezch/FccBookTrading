@@ -3,19 +3,29 @@ import FlipMove from 'react-flip-move'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../../actions'
+import SearchInput, {createFilter} from 'react-search-input'
+
+const KEYS_TO_FILTERS = ['title']
 
 class BookList extends Component {
-  componentDidMount() {
-    if (this.props.match.path==="/mybooks") {
-      this.props.fetchMyBooks()
-    } else {
-      this.props.fetchBooks()
+  constructor (props) {
+    super(props)
+    this.state = {
+      searchTerm: ''
     }
+    this.searchUpdated = this.searchUpdated.bind(this)
+  }
+  componentDidMount() {
+      this.props.fetchBooks()
   }
  
+  searchUpdated (term) {
+    this.setState({searchTerm: term})
+  }
   renderBooks() {
-
-    return this.props.books.reverse().map((book, index) => {
+    const filteredBooks = this.props.books.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
+  
+    return filteredBooks.reverse().map((book, index) => {
       
       return (
         
@@ -48,6 +58,7 @@ class BookList extends Component {
     return (
 
       <div style={{marginLeft:200}}>
+      <SearchInput className="search-input" onChange={this.searchUpdated} />
         <FlipMove maintainContainerHeight={true} duration={750} easing="ease-out">
         <div className="row" >
           {this.renderBooks()}
