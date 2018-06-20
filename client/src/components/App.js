@@ -19,6 +19,7 @@ class App extends Component {
   
   componentDidMount() {
     this.props.fetchUser()
+   
   }
   renderContent() {
     const PrivateRoute = ({ component: Component, ...rest }) => (

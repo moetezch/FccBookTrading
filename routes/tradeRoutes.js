@@ -20,14 +20,24 @@ module.exports = app => {
     res.send({})
   })
 
-  app.post('/api/tradeResponse', async (req, res) => {
-    console.log(req.body);
+  app.post('/api/tradeResponse/:id', async (req, res) => {
+    const query = { _id: req.params.id }
+    console.log(req.params.id);
     
+    console.log(req.body.answer);
+    Trade.updateOne(query,
+      { $set: {"status":req.body.answer } },
+           (err, result) => {
+     if (err) {
+         return console.log(err);
+     }
+     res.sendStatus(200);
+ })
 
   })
 
   app.get('/api/trade/received', async (req, res) => {
-    console.log(req.user.id);
+   // console.log(req.user.id);
 
     const trade=await Trade.find({
       "receiver._user":req.user.id

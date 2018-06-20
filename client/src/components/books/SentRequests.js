@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '../../actions'
 import { Modal, Button, Row, Input } from "react-materialize"
-
+import FlipMove from 'react-flip-move'
 
 class SentRequest extends Component {
   componentDidMount() {
@@ -16,10 +16,15 @@ class SentRequest extends Component {
           <li className="collection-item avatar" key={trade._id}>
           <i className="material-icons circle green">compare_arrows</i>
           <span className="title">#{index+1}</span>
-          <p>Exchange Book : {trade.sender.bookTitle}</p>
-        <p>Requested Book : {trade.receiver.bookTitle}</p>
-          <p><Link to={`/users/${trade.receiver._user}`}>Book Owner details</Link></p>
-          <p>Status : {trade.status}</p>
+          <p><strong>Exchange Book :</strong> {trade.sender.bookTitle}</p>
+        <p><strong>Requested Book :</strong> {trade.receiver.bookTitle}</p>
+        {trade.status==='Accepted'?
+        <p style={{"textColor":"red"}}><Link to={`/users/${trade.receiver._user}`}>View Book Owner details</Link></p>:
+        
+        <p>You will be able to see the book owner details once he accepets your request</p>
+      
+      }
+          <p><strong>Status : </strong> {trade.status}</p>
           <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
         </li>
       )
@@ -31,10 +36,12 @@ class SentRequest extends Component {
       <div className="container">
       <div className="row">
 
-          <div className="col s12" id="1">
+          <div className="col s12" id="1"  style={{marginLeft:120}}>
             <h3>Sent Requests</h3>
             <ul className="collection">
+            <FlipMove maintainContainerHeight={true} duration={750} easing="ease-out">
               {this.renderSentTrades()}
+              </FlipMove>
             </ul>
           </div>
     </div>
@@ -45,7 +52,7 @@ class SentRequest extends Component {
 }
 
 function mapStateToProps(state) {
-  return { trade:state.trade}
+  return { trade:state.sentTrade}
 }
 
 

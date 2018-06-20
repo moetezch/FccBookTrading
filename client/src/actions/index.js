@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { FETCH_USER, SAVE_USER, ADD_BOOK, FETCH_BOOKS,
    FETCH_MY_BOOKS, USER_PROFILE, FETCH_BOOK, DELETE_BOOK,
-    TRADE_REQUEST,FETCH_RECEIVED_TRADE,FETCH_SENT_TRADE }
+    TRADE_REQUEST,FETCH_RECEIVED_TRADE,FETCH_SENT_TRADE,TRADE_CHOICE }
     
     from './types'
 
@@ -18,7 +18,6 @@ export const saveUser = (id, values) => async (dispatch) => {
   dispatch({ type: SAVE_USER, payload: res.data })
 }
 export const addBook = (id, values) => async (dispatch) => {
-
   const res = await axios.post('/api/books/add/' + id, values)
   dispatch({ type: ADD_BOOK, payload: res.data })
 }
@@ -51,4 +50,8 @@ export const fetchReceivedTrade = () => async (dispatch) => {
 export const fetchSentTrade = () => async (dispatch) => {
   const res = await axios.get('/api/trade/sent/')
   dispatch({ type: FETCH_SENT_TRADE, payload: res.data })
+}
+export const tradeChoice = (id,values) => async (dispatch) => {
+  const res = await axios.post('/api/tradeResponse/' + id, values)
+  dispatch({ type: TRADE_CHOICE, payload: res.data })
 }

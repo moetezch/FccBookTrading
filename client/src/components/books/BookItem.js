@@ -87,7 +87,8 @@ console.log(this.props);
                     "receiverBookTitle":this.props.book.title
                   }
                   this.props.sendTradeRequest(values)
-                  this.props.history.push('/trade');
+                  this.props.fetchReceivedTrade()
+                  this.props.history.push('/sent')
                 })}
                 
                 >Confirm</button>
