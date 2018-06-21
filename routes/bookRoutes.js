@@ -22,7 +22,7 @@ module.exports = app => {
         res.send(books)
         
       })
-      app.get('/api/books',async (req,res)=>{
+      app.get('/api/books',requireLogin,async (req,res)=>{
         const books=await Book.find({
         })
         
@@ -37,7 +37,7 @@ module.exports = app => {
         
         res.send(book)
       })
-    app.post('/api/books/add/:id', async (req, res) => {
+    app.post('/api/books/add/:id',requireLogin, async (req, res) => {
       
         const { title,pic,description } = req.body
         

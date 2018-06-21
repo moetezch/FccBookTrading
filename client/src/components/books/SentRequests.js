@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '../../actions'
-import { Modal, Button, Row, Input } from "react-materialize"
 import FlipMove from 'react-flip-move'
 
 class SentRequest extends Component {

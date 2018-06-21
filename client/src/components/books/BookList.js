@@ -59,11 +59,15 @@ class BookList extends Component {
 
       <div style={{marginLeft:200}}>
       <SearchInput className="search-input" onChange={this.searchUpdated} />
-        <FlipMove maintainContainerHeight={true} duration={750} easing="ease-out">
+       
         <div className="row" >
+        
+        <FlipMove maintainContainerHeight={true} duration={750} easing="cubic-bezier(1, 0, 0, 1)">
           {this.renderBooks()}
+          </FlipMove>
+         
           </div>
-        </FlipMove>
+       
 
 
       </div>

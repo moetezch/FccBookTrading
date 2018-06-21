@@ -45,14 +45,14 @@ class App extends Component {
       <div>
         <Header />
         <Route exact path="/" component={Landing} />
-        <Route path="/profile" component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route path="/books" component={AllBooks} />
-        <Route path="/book/:id" component={BookItem} />
-        <Route exact path="/mybooks" component={MyBooks} />
-        <Route exact path="/mybooks/new" component={NewBook} />
-        <Route path="/sent" component={SentRequests} />
-        <Route path="/received" component={ReceivedRequests} />
-        <Route path="/users/:id" component={UserDetails} />
+        <PrivateRoute path="/book/:id" component={BookItem} />
+        <PrivateRoute exact path="/mybooks" component={MyBooks} />
+        <PrivateRoute exact path="/mybooks/new" component={NewBook} />
+        <PrivateRoute path="/sent" component={SentRequests} />
+        <PrivateRoute path="/received" component={ReceivedRequests} />
+        <PrivateRoute path="/users/:id" component={UserDetails} />
       </div>
     </BrowserRouter>
  

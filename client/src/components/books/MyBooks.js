@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import BookList from './BookList'
 import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
 import { Modal, Button } from "react-materialize"
-import { Link } from 'react-router-dom'
 import * as actions from '../../actions'
 import moment from 'moment'
 

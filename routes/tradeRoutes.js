@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 const requireLogin = require('../middlewares/requireLogin')
 const Trade = mongoose.model('trades')
-const Book=mongoose.model('books')
 
 
 module.exports = app => {
-  app.post('/api/tradeRequest', async (req, res) => {
-    console.log(req.body);
+  app.post('/api/tradeRequest', requireLogin,async (req, res) => {
+
     const { senderID, senderBookTitle, receiverID, receiverBookTitle } = req.body
 
     const trade = new Trade({
@@ -20,11 +19,9 @@ module.exports = app => {
     res.send({})
   })
 
-  app.post('/api/tradeResponse/:id', async (req, res) => {
+  app.post('/api/tradeResponse/:id',requireLogin, async (req, res) => {
     const query = { _id: req.params.id }
-    console.log(req.params.id);
-    
-    console.log(req.body.answer);
+
     Trade.updateOne(query,
       { $set: {"status":req.body.answer } },
            (err, result) => {
@@ -36,8 +33,8 @@ module.exports = app => {
 
   })
 
-  app.get('/api/trade/received', async (req, res) => {
-   // console.log(req.user.id);
+  app.get('/api/trade/received',requireLogin, async (req, res) => {
+
 
     const trade=await Trade.find({
       "receiver._user":req.user.id
@@ -46,8 +43,8 @@ module.exports = app => {
 
     res.send(trade)
   })
-  app.get('/api/trade/sent', async (req, res) => {
-    //console.log(req.user.id);
+  app.get('/api/trade/sent',requireLogin, async (req, res) => {
+
 
     const trade = await Trade.find({
       "sender._user": req.user.id

@@ -18,11 +18,8 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 
 class NewBook extends Component {
   onSubmit = (book) => {
-    //console.log(book);
-
     this.props.addBook(this.props.auth._id, book)
     this.props.history.push('/mybooks');
-
   }
   render() {
     const { handleSubmit } = this.props

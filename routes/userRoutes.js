@@ -3,18 +3,16 @@ const requireLogin =require ('../middlewares/requireLogin')
 const User=mongoose.model('users')
 
 
-const passport = require('passport')
-
 module.exports = app => {
 
 
-      app.get('/api/profile/:id',async (req,res)=>{
+      app.get('/api/profile/:id',requireLogin,async (req,res)=>{
         const query={_id:req.params.id}
         const userProfile =await User.findOne(query)
         res.send(userProfile)
       })
 
-    app.post('/api/profile/:id', async (req, res) => {
+    app.post('/api/profile/:id',requireLogin, async (req, res) => {
         const query = { _id: req.params.id }
         const { firstName, lastName, phone, email, city, country, state } = req.body
         

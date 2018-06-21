@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { Row, Input, Icon } from "react-materialize"
+import { Row, Input, Icon,Toast } from "react-materialize"
 import { reduxForm, Field} from 'redux-form'
 import validate from '../utils/validateProfileForm'
 import { saveUser,fetchUser} from '../actions/index'
@@ -18,7 +18,7 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 class Profile extends Component {
 
   componentDidMount() {
-    this.props.dispatch(fetchUser())
+    this.props.fetchUser()
     
     this.handleInitialize();
   }
@@ -51,12 +51,11 @@ class Profile extends Component {
     this.props.initialize(initData);
   }
   onSubmit = (profile) => {
-    console.log(profile);
-    
     this.props.saveUser(this.props.auth._id,profile)
     this.props.fetchUser()
-    this.props.history.push('/books');
-    
+    setTimeout(() => {
+      this.props.fetchUser()
+    }, 2000)
   }
 
   renderButton(){
@@ -66,13 +65,13 @@ class Profile extends Component {
          return 
       case true:
       return (
-        <button className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">done</i>Save</button>
+        <Toast toast="Profile Saved!" className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">done</i>Save</Toast>
 
       )
      
        default:
          return (
-          <button className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">sync</i>Update</button>
+          <Toast toast="Profile Updated!" className="btn waves-effect waves-light" type="submit" ><i className="material-icons right">sync</i>Update</Toast>
 
          )
      }
@@ -152,8 +151,6 @@ class Profile extends Component {
         {this.renderButton()}
           </div>
         </form>
-
-
       </div>
     );
   }

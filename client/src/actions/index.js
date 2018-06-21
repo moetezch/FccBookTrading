@@ -42,7 +42,6 @@ export const sendTradeRequest = (values) => async (dispatch) => {
   const res = await axios.post('/api/tradeRequest/',values)
   dispatch({ type: TRADE_REQUEST, payload: res.data })
 }
-
 export const fetchReceivedTrade = () => async (dispatch) => {
   const res = await axios.get('/api/trade/received/')
   dispatch({ type: FETCH_RECEIVED_TRADE, payload: res.data })

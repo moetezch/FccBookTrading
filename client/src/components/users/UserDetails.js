@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
 import { userProfile} from '../../actions/index'
 
  class UserDetails extends Component {
   componentDidMount() {
-    console.log(this.props.match.params.id);
-    console.log(this.props);
-    
     this.props.userProfile(this.props.match.params.id)
   }
 
