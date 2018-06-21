@@ -45,7 +45,7 @@ class App extends Component {
       <div>
         <Header />
         <Route exact path="/" component={Landing} />
-        <PrivateRoute path="/profile" component={Profile} />
+        <Route path="/profile" component={Profile} />
         <Route path="/books" component={AllBooks} />
         <PrivateRoute path="/book/:id" component={BookItem} />
         <PrivateRoute exact path="/mybooks" component={MyBooks} />
@@ -61,8 +61,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="">
-
+      <div>
         {this.renderContent()}
       </div>
     );

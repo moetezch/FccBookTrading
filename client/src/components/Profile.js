@@ -18,14 +18,13 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 class Profile extends Component {
 
   componentDidMount() {
-    //this.props.fetchUser()
     
     this.handleInitialize();
   }
   handleInitialize() {
   
     let initData={}
-    if (this.props.auth) {
+    if (this.props.auth.address) {
       initData = {
         firstName:this.props.auth.firstName,
         lastName: this.props.auth.lastName,
@@ -52,7 +51,6 @@ class Profile extends Component {
   }
   onSubmit = (profile) => {
     this.props.saveUser(this.props.auth._id,profile)
-   // this.props.fetchUser()
     setTimeout(() => {
       this.props.fetchUser()
     }, 2000)
