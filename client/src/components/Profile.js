@@ -18,7 +18,7 @@ const renderField = ({ input, label, type, meta: { touched, error }, ...custom }
 class Profile extends Component {
 
   componentDidMount() {
-    this.props.fetchUser()
+    //this.props.fetchUser()
     
     this.handleInitialize();
   }
@@ -52,7 +52,7 @@ class Profile extends Component {
   }
   onSubmit = (profile) => {
     this.props.saveUser(this.props.auth._id,profile)
-    this.props.fetchUser()
+   // this.props.fetchUser()
     setTimeout(() => {
       this.props.fetchUser()
     }, 2000)
